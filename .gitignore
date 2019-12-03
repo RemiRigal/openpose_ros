@@ -1,0 +1,5 @@
+# OpenPose Models
+*.caffemodel
+
+# PyCharm
+.idea
