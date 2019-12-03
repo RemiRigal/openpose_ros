@@ -35,7 +35,7 @@ namespace openpose_ros {
             // const op::WrapperStructGui wrapperStructGui;
 
         public:
-            OpenPose();
+            OpenPose(std::string model_pose, std::string model_folder, bool face, bool hand);
 
             ~OpenPose(){}
 

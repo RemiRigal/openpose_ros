@@ -34,13 +34,20 @@ int openPoseROS()
     op::opLog("Starting pose estimation demo.", op::Priority::High);
     const auto timerBegin = std::chrono::high_resolution_clock::now();
 
-    openpose_ros::OpenPose openPose;
+    bool face;
+    bool hand;
+    std::string model_folder, model_pose;
+    ros::param::get("~openpose_model_folder", model_folder);
+    ros::param::get("~model_pose", model_pose);
+    ros::param::get("~face", face);
+    ros::param::get("~hand", hand);
+    openpose_ros::OpenPose openPose(model_pose, model_folder, face, hand);
 
     op::opLog("Starting thread(s)", op::Priority::High);
     openPose.start();
 
     // OpenPose processing
-    openpose_ros::OpenPoseROSIO openPoseROSIO(openPose);
+    openpose_ros::OpenPoseROSIO openPoseROSIO(openPose, face, hand);
     
     ros::spin();
 

@@ -2,12 +2,13 @@
 
 using namespace openpose_ros;
 
-OpenPose::OpenPose() : outputSize(op::flagsToPoint(op::String(FLAGS_output_resolution), "-1x-1")),
+OpenPose::OpenPose(std::string model_pose, std::string model_folder, bool face, bool hand) :
+                       outputSize(op::flagsToPoint(op::String(FLAGS_output_resolution), "-1x-1")),
                        netInputSize(op::flagsToPoint(op::String(FLAGS_net_resolution), "-1x368")),
                        faceNetInputSize(op::flagsToPoint(op::String(FLAGS_face_net_resolution), "368x368 (multiples of 16)")),
                        handNetInputSize(op::flagsToPoint(op::String(FLAGS_hand_net_resolution), "368x368 (multiples of 16)")),
                        poseMode(op::flagsToPoseMode(FLAGS_body)),
-                       poseModel(op::flagsToPoseModel(op::String(FLAGS_model_pose))),
+                       poseModel(op::flagsToPoseModel(op::String(model_pose))),
                        keypointScaleMode(op::flagsToScaleMode(FLAGS_keypoint_scale)),
                        heatMapTypes(op::flagsToHeatMaps(FLAGS_heatmaps_add_parts, FLAGS_heatmaps_add_bkg,
                                                         FLAGS_heatmaps_add_PAFs)),
@@ -20,14 +21,14 @@ OpenPose::OpenPose() : outputSize(op::flagsToPoint(op::String(FLAGS_output_resol
                        wrapperStructPose(poseMode, netInputSize, outputSize, keypointScaleMode, FLAGS_num_gpu, FLAGS_num_gpu_start,
                                          FLAGS_scale_number, (float)FLAGS_scale_gap, op::flagsToRenderMode(FLAGS_render_pose, multipleView),
                                          poseModel, !FLAGS_disable_blending, (float)FLAGS_alpha_pose, (float)FLAGS_alpha_heatmap,
-                                         FLAGS_part_to_show, op::String(FLAGS_model_folder), heatMapTypes, heatMapScaleMode, FLAGS_part_candidates,
+                                         FLAGS_part_to_show, op::String(model_folder), heatMapTypes, heatMapScaleMode, FLAGS_part_candidates,
                                          (float)FLAGS_render_threshold, FLAGS_number_people_max, FLAGS_maximize_positives, FLAGS_fps_max,
                                          op::String(FLAGS_prototxt_path), op::String(FLAGS_caffemodel_path),
                                          (float)FLAGS_upsampling_ratio, enableGoogleLogging),
-                       wrapperStructFace(FLAGS_face, faceDetector, faceNetInputSize,
+                       wrapperStructFace(face, faceDetector, faceNetInputSize,
                                          op::flagsToRenderMode(FLAGS_face_render, multipleView, FLAGS_render_pose),
                                          (float)FLAGS_face_alpha_pose, (float)FLAGS_face_alpha_heatmap, (float)FLAGS_face_render_threshold),
-                       wrapperStructHand(FLAGS_hand, handDetector, handNetInputSize, FLAGS_hand_scale_number, (float)FLAGS_hand_scale_range,
+                       wrapperStructHand(hand, handDetector, handNetInputSize, FLAGS_hand_scale_number, (float)FLAGS_hand_scale_range,
                                          op::flagsToRenderMode(FLAGS_hand_render, multipleView, FLAGS_render_pose), (float)FLAGS_hand_alpha_pose,
                                          (float)FLAGS_hand_alpha_heatmap, (float)FLAGS_hand_render_threshold),
                        wrapperStructExtra(FLAGS_3d, FLAGS_3d_min_views, FLAGS_identification, FLAGS_tracking, FLAGS_ik_threads),

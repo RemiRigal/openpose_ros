@@ -12,7 +12,6 @@ DECLARE_int32(logging_level);
 DECLARE_bool(disable_multi_thread);
 DECLARE_int32(profile_speed);
 // OpenPose
-DECLARE_string(model_folder);
 DECLARE_string(prototxt_path);
 DECLARE_string(caffemodel_path);
 DECLARE_string(output_resolution);
@@ -24,7 +23,6 @@ DECLARE_bool(maximize_positives);
 DECLARE_double(fps_max);
 // OpenPose Body Pose
 DECLARE_int32(body);
-DECLARE_string(model_pose);
 DECLARE_string(net_resolution);
 DECLARE_int32(scale_number);
 DECLARE_double(scale_gap);
@@ -36,11 +34,9 @@ DECLARE_int32(heatmaps_scale);
 DECLARE_bool(part_candidates);
 DECLARE_double(upsampling_ratio);
 // OpenPose Face
-DECLARE_bool(face);
 DECLARE_int32(face_detector);
 DECLARE_string(face_net_resolution);
 // OpenPose Hand
-DECLARE_bool(hand);
 DECLARE_int32(hand_detector);
 DECLARE_string(hand_net_resolution);
 DECLARE_int32(hand_scale_number);

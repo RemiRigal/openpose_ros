@@ -38,6 +38,9 @@ namespace openpose_ros {
             bool display_output_flag_;
             bool print_keypoints_flag_;
 
+            bool face;
+            bool hand;
+
             bool save_original_video_flag_;
             std::string original_video_file_name_;
             bool original_video_writer_initialized_;
@@ -51,7 +54,7 @@ namespace openpose_ros {
             int video_fps_;
 
         public:
-            OpenPoseROSIO(OpenPose &openPose);
+            OpenPoseROSIO(OpenPose &openPose, bool _face, bool _hand);
 
             ~OpenPoseROSIO(){}
 

@@ -2,8 +2,11 @@
 
 using namespace openpose_ros;
 
-OpenPoseROSIO::OpenPoseROSIO(OpenPose &openPose): nh_("/openpose_ros_node"), it_(nh_)
+OpenPoseROSIO::OpenPoseROSIO(OpenPose &openPose, bool _face, bool _hand): nh_("/openpose_ros_node"), it_(nh_)
 {
+    face = _face;
+    hand = _hand;
+
     // Subscribe to input video feed and publish human lists as output
     std::string image_topic;
     std::string output_topic;
@@ -211,11 +214,11 @@ void OpenPoseROSIO::printKeypoints(const std::shared_ptr<std::vector<std::shared
         }
         op::opLog(" ");
         // Alternative: just getting std::string equivalent
-        if(FLAGS_face)
+        if(face)
         {
             op::opLog("Face keypoints: " + datumsPtr->at(0)->faceKeypoints.toString(), op::Priority::High);
         }
-        if(FLAGS_hand)
+        if(hand)
         {
             op::opLog("Left hand keypoints: " + datumsPtr->at(0)->handKeypoints[0].toString(), op::Priority::High);
             op::opLog("Right hand keypoints: " + datumsPtr->at(0)->handKeypoints[1].toString(), op::Priority::High);
@@ -310,7 +313,7 @@ void OpenPoseROSIO::publish(const std::shared_ptr<std::vector<std::shared_ptr<op
             human.body_bounding_box.width = body_max_x - body_min_x;
             human.body_bounding_box.height = body_max_y - body_min_y;
 
-            if(FLAGS_face)
+            if(face)
             {
                 int num_face_key_points_with_non_zero_prob = 0;
 
@@ -336,7 +339,7 @@ void OpenPoseROSIO::publish(const std::shared_ptr<std::vector<std::shared_ptr<op
                 human.face_bounding_box = face_bounding_box;
             }
             
-            if(FLAGS_hand)
+            if(hand)
             {
 
                 int num_right_hand_key_points_with_non_zero_prob = 0;

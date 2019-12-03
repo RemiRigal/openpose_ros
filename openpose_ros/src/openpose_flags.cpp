@@ -15,7 +15,6 @@ DEFINE_int32(profile_speed,             1000,           "If PROFILER_ENABLED was
                                                         " runtime statistics at this frame number.");
 #ifndef OPENPOSE_FLAGS_DISABLE_POSE
 // OpenPose
-DEFINE_string(model_folder,             "/path/to/openpose/models/",      "Folder path (absolute or relative) where the models (pose, face, ...) are located.");
 DEFINE_string(prototxt_path,            "",             "The combination `--model_folder` + `--prototxt_path` represents the whole path to the"
                                                         " prototxt file. If empty, it will use the default OpenPose ProtoTxt file.");
 DEFINE_string(caffemodel_path,          "",             "The combination `--model_folder` + `--caffemodel_path` represents the whole path to the"
@@ -49,9 +48,6 @@ DEFINE_int32(body,                      1,              "Select 0 to disable bod
                                                         " keypoint detection, custom hand detector, etc.), 1 (default) for body keypoint"
                                                         " estimation, and 2 to disable its internal body pose estimation network but still"
                                                         " still run the greedy association parsing algorithm");
-DEFINE_string(model_pose,               "BODY_25",      "Model to be used. E.g., `BODY_25` (fastest for CUDA version, most accurate, and includes"
-                                                        " foot keypoints), `COCO` (18 keypoints), `MPI` (15 keypoints, least accurate model but"
-                                                        " fastest on CPU), `MPI_4_layers` (15 keypoints, even faster but less accurate).");
 DEFINE_string(net_resolution,           "-1x368",       "Multiples of 16. If it is increased, the accuracy potentially increases. If it is"
                                                         " decreased, the speed increases. For maximum speed-accuracy balance, it should keep the"
                                                         " closest aspect ratio possible to the images or videos to be processed. Using `-1` in"
@@ -85,10 +81,6 @@ DEFINE_bool(part_candidates,            false,          "Also enable `write_json
 DEFINE_double(upsampling_ratio,         0.,             "Upsampling ratio between the `net_resolution` and the output net results. A value less"
                                                         " or equal than 0 (default) will use the network default value (recommended).");
 // OpenPose Face
-DEFINE_bool(face,                       false,          "Enables face keypoint detection. It will share some parameters from the body pose, e.g."
-                                                        " `model_folder`. Note that this will considerable slow down the performance and increse"
-                                                        " the required GPU memory. In addition, the greater number of people on the image, the"
-                                                        " slower OpenPose will be.");
 DEFINE_int32(face_detector,             0,              "Kind of face rectangle detector. Select 0 (default) to select OpenPose body detector (most"
                                                         " accurate one and fastest one if body is enabled), 1 to select OpenCV face detector (not"
                                                         " implemented for hands), 2 to indicate that it will be provided by the user, or 3 to"
@@ -100,9 +92,6 @@ DEFINE_string(face_net_resolution,      "368x368",      "Multiples of 16 and squ
                                                         " detector. 320x320 usually works fine while giving a substantial speed up when multiple"
                                                         " faces on the image.");
 // OpenPose Hand
-DEFINE_bool(hand,                       false,          "Enables hand keypoint detection. It will share some parameters from the body pose, e.g."
-                                                        " `model_folder`. Analogously to `--face`, it will also slow down the performance, increase"
-                                                        " the required GPU memory and its speed depends on the number of people.");
 DEFINE_int32(hand_detector,             0,              "Kind of hand rectangle detector. Analogous to `--face_detector`.");
 DEFINE_string(hand_net_resolution,      "368x368",      "Multiples of 16 and squared. Analogous to `net_resolution` but applied to the hand keypoint"
                                                         " detector.");
