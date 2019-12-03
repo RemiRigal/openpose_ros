@@ -1,0 +1,5 @@
+.git
+.idea
+
+openpose_ros/models/pose/coco
+openpose_ros/models/pose/mpi
