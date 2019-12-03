@@ -261,8 +261,7 @@ void OpenPoseROSIO::publish(const std::shared_ptr<std::vector<std::shared_ptr<op
         std::vector<op::Rectangle<float>>& face_rectangles = datumsPtr->at(0)->faceRectangles;
 
         openpose_ros_msgs::OpenPoseHumanList human_list_msg;
-        human_list_msg.header.stamp = ros::Time::now();
-        human_list_msg.image_header = image_header_;
+        human_list_msg.header = image_header_;
         human_list_msg.num_humans = poseKeypoints.getSize(0);
         
         std::vector<openpose_ros_msgs::OpenPoseHuman> human_list(poseKeypoints.getSize(0));
