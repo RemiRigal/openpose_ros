@@ -153,7 +153,7 @@ bool OpenPoseROSIO::saveOriginalVideo(const std::shared_ptr<std::vector<std::sha
         {
             if(!original_video_writer_initialized_)
             {
-                original_video_writer_ = cv::VideoWriter(original_video_file_name_, CV_FOURCC('M','J','P','G'), video_fps_, current_image.size());
+                original_video_writer_ = cv::VideoWriter(original_video_file_name_, cv::VideoWriter::fourcc('M','J','P','G'), video_fps_, current_image.size());
                 original_video_writer_initialized_ = true;
             }   
             original_video_writer_.write(current_image);
@@ -174,7 +174,7 @@ bool OpenPoseROSIO::saveOpenPoseVideo(const std::shared_ptr<std::vector<std::sha
         {
             if(!openpose_video_writer_initialized_)
             {
-                openpose_video_writer_ = cv::VideoWriter(openpose_video_file_name_, CV_FOURCC('M','J','P','G'), video_fps_, current_image.size());
+                openpose_video_writer_ = cv::VideoWriter(openpose_video_file_name_, cv::VideoWriter::fourcc('M','J','P','G'), video_fps_, current_image.size());
                 openpose_video_writer_initialized_ = true;
             }   
             openpose_video_writer_.write(current_image);
